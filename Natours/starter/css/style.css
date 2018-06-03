@@ -1,8 +1,114 @@
 /*
 COLORS:
 
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
+Light green: #7ed56f rgb(126, 213, 111) rgba(126, 213, 111, 0.8)
+Medium green: #55c57a rgb()
+Dark green: #28b485 rgb(40, 180, 131) rgb(40, 180, 131, 0.8)
 
 */
+
+/* Universal Selector  ----------------------
+It will apply to all the elements in the html
+*/
+* {
+    padding: 0;
+    margin: 0;
+    /* changes the box model, and borders and paddings are not added to the total height or width of an element. */
+    box-sizing: border-box;
+}
+
+/* BODY -------------------------------------
+font-family will be inherited by all the elements contained in body.
+Lato font has been included in the html head. It is a google font -> <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+padding is not inherited, it will apply to the body of the entire page
+ */
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777;
+    padding: 30px;
+}
+
+/* HEADER -------------------------------------
+background-image: can specify two or more images spread by comma, they will be one in top of the other
+linear-gradient(to right, #7ed56f, #28b485: set a gradient with: direction, initial color, end color
+vh:  means it will fill the height till 95% of the viewport height, it will leave 5% at the botom
+cover: no matter the width of the viewport it tries to fit the image inside the box
+top: will fix the top of the image when resize
+clip-path: clips the image based on a polygon
+polygon: defines a polygon with 4 x y coordinates that builds the polygon. It starts from lef top of the element to the right (clockwise)...
+ */
+.header {
+    height: 95vh;
+    background-size: cover;
+    background: linear-gradient(
+            to right bottom,
+            rgba(126, 213, 111, 0.8),
+            rgba(40, 180, 131, 0.8)),
+    url(../img/hero.jpg) top;
+
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    position: relative;
+}
+
+/*
+absolute: to take a reference from the top left corner of the container.
+top / left: the distance of the image from the top and left margins of the container element.
+REQUIREMENT: for top and left works as expected, the container element should have the position as relative.
+ */
+.logo-box {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+/*
+logo:
+height / width: we only have to specify one value, the other one is auto calculated.
+ */
+.logo {
+    height: 35px;
+}
+
+/*
+absolute: to take a reference from the top left corner of the container.
+transform: allows to transform a property of the element.
+translate: translates the element to the desired position in reference with itself.
+It receives an x y values to translate the element to the final position relative to it self.
+ */
+.text-box {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+}
+
+/*
+ color y text-transform applies also to heading-primary-main and heading-primary-sub since they are within this element.
+ */
+.heading-primary {
+    color: #fff;
+    text-transform: uppercase;
+}
+
+/*
+ block: makes the element occupy the entire width
+ */
+.heading-primary-main {
+    display: block;
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+}
+
+/*
+block: makes the element occupy the entire width
+ */
+.heading-primary-sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 17.4px;
+}
