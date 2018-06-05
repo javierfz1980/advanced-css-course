@@ -17,6 +17,10 @@ It will apply to all the elements in the html
     box-sizing: border-box;
 }
 
+
+
+
+
 /* BODY -------------------------------------
 font-family will be inherited by all the elements contained in body.
 Lato font has been included in the html head. It is a google font -> <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
@@ -30,6 +34,10 @@ body {
     color: #777;
     padding: 30px;
 }
+
+
+
+
 
 /* HEADER -------------------------------------
 background-image: can specify two or more images spread by comma, they will be one in top of the other
@@ -72,7 +80,12 @@ height / width: we only have to specify one value, the other one is auto calcula
     height: 35px;
 }
 
+.logo:hover {
+    animation: moveInRight 1s ease-out;
+}
+
 /*
+The heading text and button container...
 absolute: to take a reference from the top left corner of the container.
 transform: allows to transform a property of the element.
 translate: translates the element to the desired position in reference with itself.
@@ -86,14 +99,19 @@ It receives an x y values to translate the element to the final position relativ
 }
 
 /*
+The header text/title
  color y text-transform applies also to heading-primary-main and heading-primary-sub since they are within this element.
+ backsafe-visibility: fix a little visual bug on visual element
  */
 .heading-primary {
     color: #fff;
     text-transform: uppercase;
+
+    backsafe-visibility: hidden
 }
 
 /*
+The header text/title 1
  block: makes the element occupy the entire width
  */
 .heading-primary-main {
@@ -101,9 +119,16 @@ It receives an x y values to translate the element to the final position relativ
     font-size: 60px;
     font-weight: 400;
     letter-spacing: 35px;
+
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    /*animation-delay: 3s;
+    animation-iteration-count: 3;*/
+    animation-timing-function: ease-in-out;
 }
 
 /*
+The header text/title 2
 block: makes the element occupy the entire width
  */
 .heading-primary-sub {
@@ -111,4 +136,42 @@ block: makes the element occupy the entire width
     font-size: 20px;
     font-weight: 700;
     letter-spacing: 17.4px;
+
+    /*animation-name: moveInRight;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;*/
+    animation: moveInRight 1s ease-out;
+}
+
+
+
+
+
+/* ANIMATIONS -------------------------------------*/
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    80% {
+        transform: translateX(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    80% {
+        transform: translateX(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
 }
