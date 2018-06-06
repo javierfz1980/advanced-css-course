@@ -146,10 +146,11 @@ block: makes the element occupy the entire width
 }
 
 /*
+Generic styles for all the .btn
 padding: top, right, bottom, left / top & bottom, right & left / all sides
 display: inline-block; will force the element to have his own space and no overlap with the other elements. This is important in order to add padding or heights or widths to the elements.
 
-pseudo classes:
+pseudo class selectors:
 :link -> natural state
 :visited -> after it has been clicked
 :hover -> when mouse over
@@ -158,6 +159,8 @@ Note: a:hover MUST come after a:link and a:visited in the CSS definition in orde
 
 transition: porp time; indicates over which properties of each state/pseudo class will animate the transitions. In this case it will animate all the properties on each state from the original state with a duration of .2s.
 this example is transitioning the Y and the box-shadow on each state from the previous one, with a duration of .2s.
+
+position: relative; in order to aling child ::after element as absolute + top + left
  */
 .btn:link,
 .btn:visited {
@@ -167,6 +170,7 @@ this example is transitioning the Y and the box-shadow on each state from the pr
     display: inline-block;
     border-radius: 100px;
     transition: all .2s;
+    position: relative;
 }
 
 /*
@@ -182,11 +186,56 @@ box-shadow: x shadow, y shadow, blur (1-100), color (rgba = r + g +b + alpha)
     box-shadow: 0 5px 10px rgba(0,0,0,.2);
 }
 
+/*
+Particular style for the .btn-white, this could be used in parallel with .btn
+ */
 .btn-white {
     background-color: #fff;
     color: #777;
 }
 
+/*
+Partucylar style for animated .btn-animated this could be used in parallel with .btn and with a btn color like .btn-white
+animation: @keyframe, duration, ease, delay
+animation-fill-mode: backwards; Will apply the initial 0% state of the @keyframe to the element since this has a delay, in order to avoid the waiting and set up the element in the initial keyframe state.
+ */
+.btn-animated {
+    animation: moveInBottom .5s ease-out .75s;
+    animation-fill-mode: backwards;
+}
+
+/*
+The ::after selector inserts something after the content of each selected element(s). In this case the .btn
+- Use the content property to specify the content to insert. (In this case we don't want any specific content since we wants to match the parent content .btn)
+- Use the content property to specify the content to insert.
+- width & height in % will be relative to the container. So this is the same size as the parent container
+- position: absolute + top: 0 left: 0 This is in order align the after element in the same position as the parent (parent .btn should be position: relative in order to work)
+
+transition: porp time; indicates over which properties of each state/pseudo class will animate the transitions. In this case it will animate all the properties on each state from the original state with a duration of .2s.
+this example is transitioning the Y and the box-shadow on each state from the previous one, with a duration of .2s.
+
+ */
+.btn::after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .2s;
+}
+
+.btn:hover::after {
+    transform: scaleY(1.6) scaleX(1.4);
+    opacity: 0;
+}
+
+.btn-white::after {
+    background-color: #fff;
+}
 
 /* ANIMATIONS -------------------------------------*/
 @keyframes moveInLeft {
@@ -214,5 +263,16 @@ box-shadow: x shadow, y shadow, blur (1-100), color (rgba = r + g +b + alpha)
     100% {
         opacity: 1;
         transform: translateX(0px);
+    }
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
     }
 }
