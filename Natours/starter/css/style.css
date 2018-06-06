@@ -90,12 +90,14 @@ absolute: to take a reference from the top left corner of the container.
 transform: allows to transform a property of the element.
 translate: translates the element to the desired position in reference with itself.
 It receives an x y values to translate the element to the final position relative to it self.
+text-align: center; Will align all the internal inline elements (<h1> and <a>) to the center.
  */
 .text-box {
     position: absolute;
     left: 50%;
     top: 40%;
     transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 /*
@@ -106,7 +108,7 @@ The header text/title
 .heading-primary {
     color: #fff;
     text-transform: uppercase;
-
+    margin-bottom: 60px;
     backsafe-visibility: hidden
 }
 
@@ -143,8 +145,47 @@ block: makes the element occupy the entire width
     animation: moveInRight 1s ease-out;
 }
 
+/*
+padding: top, right, bottom, left / top & bottom, right & left / all sides
+display: inline-block; will force the element to have his own space and no overlap with the other elements. This is important in order to add padding or heights or widths to the elements.
 
+pseudo classes:
+:link -> natural state
+:visited -> after it has been clicked
+:hover -> when mouse over
+:active -> on mouse click
+Note: a:hover MUST come after a:link and a:visited in the CSS definition in order to be effective! a:active MUST come after a:hover in the CSS definition in order to be effective! Pseudo-class names are not case-sensitive.
 
+transition: porp time; indicates over which properties of each state/pseudo class will animate the transitions. In this case it will animate all the properties on each state from the original state with a duration of .2s.
+this example is transitioning the Y and the box-shadow on each state from the previous one, with a duration of .2s.
+ */
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+}
+
+/*
+box-shadow: x shadow, y shadow, blur (1-100), color (rgba = r + g +b + alpha)
+ */
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,.2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.btn-white {
+    background-color: #fff;
+    color: #777;
+}
 
 
 /* ANIMATIONS -------------------------------------*/
