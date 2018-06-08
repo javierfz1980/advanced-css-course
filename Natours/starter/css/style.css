@@ -8,13 +8,27 @@ Dark green: #28b485 rgb(40, 180, 131) rgb(40, 180, 131, 0.8)
 */
 
 /* Universal Selector  ----------------------
-It will apply to all the elements in the html
+It will apply to all the elements in the html, and also to all the ::before/after pseudo elements in the page
 */
-* {
+*,
+*::before,
+*::after {
     padding: 0;
     margin: 0;
-    /* changes the box model, and borders and paddings are not added to the total height or width of an element. */
-    box-sizing: border-box;
+    /* changes the box model, and defines that the value on each element will be inherited from its parents */
+    box-sizing: inherit;
+
+}
+
+/* We define the root font size, since we want to have all measurements units (font-sizes, widths, heights, paddings, etc) to be based on this one (rem units) so we can have a more responsive website behaviour.
+Initially we want to start with a default fon-size equal to 10px so every rem unit convertion is quite easy... for instance:
+    - if we want a font-size of 16px, and the default is 10px, the rem should be 1.6rem (16 / 10 = 1.6);
+    - by other side we don't want to force any default harcoded value (it won't allows user to change it from browser), instead want to define a % of the value that users chooses from the browser
+    - so if the absolute default browser font sies is 16px, and we still want to have the reference as 10px, we should do 10 * 100 / 16 = 62.5%;
+ */
+html {
+    font-size: 62.5%; /* if 100% = 16px, then 62.5% = 10px */
+    /*font-size: 10px;*/
 }
 
 
@@ -29,10 +43,12 @@ padding is not inherited, it will apply to the body of the entire page
 body {
     font-family: "Lato", sans-serif;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 1.6rem; /*16px;*/
     line-height: 1.7;
     color: #777;
-    padding: 30px;
+    padding: 3rem; /*30px;*/
+    /* changes the box model, and borders and paddings are not added to the total height or width of an element. */
+    box-sizing: border-box;
 }
 
 
@@ -68,8 +84,8 @@ REQUIREMENT: for top and left works as expected, the container element should ha
  */
 .logo-box {
     position: absolute;
-    top: 40px;
-    left: 40px;
+    top: 4rem; /*40px;*/
+    left: 4rem; /*40px;*/
 }
 
 /*
@@ -77,7 +93,7 @@ logo:
 height / width: we only have to specify one value, the other one is auto calculated.
  */
 .logo {
-    height: 35px;
+    height: 3.5rem; /*35px;*/
 }
 
 .logo:hover {
@@ -108,7 +124,7 @@ The header text/title
 .heading-primary {
     color: #fff;
     text-transform: uppercase;
-    margin-bottom: 60px;
+    margin-bottom: 6rem; /*60px;*/
     backsafe-visibility: hidden
 }
 
@@ -118,9 +134,9 @@ The header text/title 1
  */
 .heading-primary-main {
     display: block;
-    font-size: 60px;
+    font-size: 6rem; /*60px;*/
     font-weight: 400;
-    letter-spacing: 35px;
+    letter-spacing: 3.5rem; /*35px;*/
 
     animation-name: moveInLeft;
     animation-duration: 1s;
@@ -135,9 +151,9 @@ block: makes the element occupy the entire width
  */
 .heading-primary-sub {
     display: block;
-    font-size: 20px;
+    font-size: 2rem; /*20px;*/
     font-weight: 700;
-    letter-spacing: 17.4px;
+    letter-spacing: 1.75rem; /*17.4px;*/
 
     /*animation-name: moveInRight;
     animation-duration: 1s;
@@ -166,9 +182,9 @@ position: relative; in order to aling child ::after element as absolute + top + 
 .btn:visited {
     text-transform: uppercase;
     text-decoration: none;
-    padding: 15px 40px;
+    padding: 1.5rem 4rem; /*15px 40px;*/
     display: inline-block;
-    border-radius: 100px;
+    border-radius: 10rem; /*100px;*/
     transition: all .2s;
     position: relative;
 }
@@ -177,13 +193,13 @@ position: relative; in order to aling child ::after element as absolute + top + 
 box-shadow: x shadow, y shadow, blur (1-100), color (rgba = r + g +b + alpha)
  */
 .btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,.2);
+    transform: translateY(-.3rem /*-3px*/);
+    box-shadow: 0 1rem 2rem /*10px 20px*/ rgba(0,0,0,.2);
 }
 
 .btn:active {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    transform: translateY(-.1rem /*-1px*/);
+    box-shadow: 0 .5rem 1rem /*5px 10px*/ rgba(0,0,0,.2);
 }
 
 /*
@@ -220,7 +236,7 @@ this example is transitioning the Y and the box-shadow on each state from the pr
     display: inline-block;
     width: 100%;
     height: 100%;
-    border-radius: 100px;
+    border-radius: 10rem; /*100px;*/
     position: absolute;
     top: 0;
     left: 0;
@@ -241,38 +257,38 @@ this example is transitioning the Y and the box-shadow on each state from the pr
 @keyframes moveInLeft {
     0% {
         opacity: 0;
-        transform: translateX(-100px);
+        transform: translateX(-10rem /*-100px*/);
     }
     80% {
-        transform: translateX(10px);
+        transform: translateX(1rem /*10px*/);
     }
     100% {
         opacity: 1;
-        transform: translateX(0px);
+        transform: translateX(0rem /*0px*/);
     }
 }
 
 @keyframes moveInRight {
     0% {
         opacity: 0;
-        transform: translateX(100px);
+        transform: translateX(10rem /*100px*/);
     }
     80% {
-        transform: translateX(-10px);
+        transform: translateX(-1rem /*-10px*/);
     }
     100% {
         opacity: 1;
-        transform: translateX(0px);
+        transform: translateX(0rem /*0px*/);
     }
 }
 
 @keyframes moveInBottom {
     0% {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(3rem /*30px*/);
     }
     100% {
         opacity: 1;
-        transform: translateY(0px);
+        transform: translateY(0rem /*0px*/);
     }
 }
