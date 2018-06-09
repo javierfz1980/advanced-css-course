@@ -47,7 +47,16 @@ body {
     line-height: 1.7;
     color: #777;
     padding: 3rem; /*30px;*/
-    /* changes the box model, and borders and paddings are not added to the total height or width of an element. */
+    /*
+     the default box sizing work in this way:
+        - padding and border are added to the element inner width.
+        - if we define a width of 100px, the element width will 100px + padding + border (it will add the padding and border)
+        - for instance, if we define a width=100px; then the real inner content width will be 100px, and the total element width will be: inner width + border + padding.
+     changes the box model of the element:
+        - borders and/or padding are not added to inner height or width of an element.
+        - if we define a width of 100px, the element width will 100px (including padding and border)
+        - for instance, if we define a width=100px; then the real inner content width will be: 100px - border - padding.
+     */
     box-sizing: border-box;
 }
 
@@ -82,7 +91,7 @@ absolute: to take a reference from the top left corner of the container.
 top / left: the distance of the image from the top and left margins of the container element.
 REQUIREMENT: for top and left works as expected, the container element should have the position as relative.
  */
-.logo-box {
+.header__logo-box {
     position: absolute;
     top: 4rem; /*40px;*/
     left: 4rem; /*40px;*/
@@ -92,11 +101,11 @@ REQUIREMENT: for top and left works as expected, the container element should ha
 logo:
 height / width: we only have to specify one value, the other one is auto calculated.
  */
-.logo {
+.header__logo {
     height: 3.5rem; /*35px;*/
 }
 
-.logo:hover {
+.header__logo:hover {
     animation: moveInRight 1s ease-out;
 }
 
@@ -108,7 +117,7 @@ translate: translates the element to the desired position in reference with itse
 It receives an x y values to translate the element to the final position relative to it self.
 text-align: center; Will align all the internal inline elements (<h1> and <a>) to the center.
  */
-.text-box {
+.header__text-box {
     position: absolute;
     left: 50%;
     top: 40%;
@@ -132,7 +141,7 @@ The header text/title
 The header text/title 1
  block: makes the element occupy the entire width
  */
-.heading-primary-main {
+.heading-primary--main {
     display: block;
     font-size: 6rem; /*60px;*/
     font-weight: 400;
@@ -149,7 +158,7 @@ The header text/title 1
 The header text/title 2
 block: makes the element occupy the entire width
  */
-.heading-primary-sub {
+.heading-primary--sub {
     display: block;
     font-size: 2rem; /*20px;*/
     font-weight: 700;
@@ -205,7 +214,7 @@ box-shadow: x shadow, y shadow, blur (1-100), color (rgba = r + g +b + alpha)
 /*
 Particular style for the .btn-white, this could be used in parallel with .btn
  */
-.btn-white {
+.btn--white {
     background-color: #fff;
     color: #777;
 }
@@ -215,7 +224,7 @@ Partucylar style for animated .btn-animated this could be used in parallel with 
 animation: @keyframe, duration, ease, delay
 animation-fill-mode: backwards; Will apply the initial 0% state of the @keyframe to the element since this has a delay, in order to avoid the waiting and set up the element in the initial keyframe state.
  */
-.btn-animated {
+.btn--animated {
     animation: moveInBottom .5s ease-out .75s;
     animation-fill-mode: backwards;
 }
@@ -249,7 +258,7 @@ this example is transitioning the Y and the box-shadow on each state from the pr
     opacity: 0;
 }
 
-.btn-white::after {
+.btn--white::after {
     background-color: #fff;
 }
 
